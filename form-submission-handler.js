@@ -34,7 +34,7 @@ function handleFormSubmit(event) {  // handles form submit withtout any jquery
       //console.log( xhr.status, xhr.statusText )
       //console.log(xhr.responseText);
       form.style.display = 'none'; // hide form
-      form.parentElement.querySelector('.thank-you-message').style.display = 'block';
+      form.parentElement.querySelector('.thank-you-message').style.display = 'block'; //thank you message should be a sibling of the form (inside of the form's parent element)
       return;
   };
   // url encode form data for sending as post data
@@ -49,8 +49,8 @@ function loaded() {
   // bind to the submit event of our form
   var forms = document.getElementsByClassName('gform');
   console.log(forms);
-  forms.forEach(function(x){
-    x.addEventListener("submit", handleFormSubmit, false);
-  });
+  for(var i=0; i < forms.length; i++){
+    forms[i].addEventListener("submit", handleFormSubmit, false);
+  }
 }
 document.addEventListener('DOMContentLoaded', loaded, false);
