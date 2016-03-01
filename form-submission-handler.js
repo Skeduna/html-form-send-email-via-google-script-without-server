@@ -39,8 +39,8 @@ function handleFormSubmit(event) {  // handles form submit withtout any jquery
   };
   // url encode form data for sending as post data
   var encoded = Object.keys(data).map(function(k) {
-      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
-  }).join('&')
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
+  }).join('&');
   xhr.send(encoded);
   /*}*/  
 }
@@ -48,8 +48,9 @@ function loaded() {
   //console.log('contact form submission handler loaded successfully');
   // bind to the submit event of our form
   var forms = document.getElementsByClassName('gform');
+  console.log(forms);
   forms.forEach(function(x){
     x.addEventListener("submit", handleFormSubmit, false);
-  }
-};
+  });
+}
 document.addEventListener('DOMContentLoaded', loaded, false);
