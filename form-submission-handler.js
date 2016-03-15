@@ -19,7 +19,9 @@ function getFormData(form) {
 
 function handleFormSubmit(event) {  // handles form submit withtout any jquery
   event.preventDefault();           // we are submitting via xhr below
+  var debugData = '';
   var form = event.target;
+  var debug = form.hasAttribute('data-debug');
   var data = getFormData(form);         // get the values submitted in the form
 /*(if( !validEmail(data.email) ) {   // if email is not valid show error
   document.getElementById('email-invalid').style.display = 'block';
@@ -33,6 +35,22 @@ function handleFormSubmit(event) {  // handles form submit withtout any jquery
   xhr.onreadystatechange = function() {
       //console.log( xhr.status, xhr.statusText )
       //console.log(xhr.responseText);
+      if(debug){
+        var debugOutput = document.createElement('PRE');
+        debugOutput.setAttribute('class', 'form-debug');
+        
+        debugData += 'Form data: ' + data + '\n';
+        debugData += 'Status: ' + xhr.status + '\n';
+        debugData += 'Status Text: ' + xhr.statusText + '\n';
+        debugData += 'Response: ' + xhr.responseText + '\n';
+        
+        debugOutput.innerHTML = debugData;
+
+        form.parentNode.appendChild(debugOutput);
+        
+      }
+      
+
       form.style.display = 'none'; // hide form
       form.parentElement.querySelector('.thank-you-message').style.display = 'block'; //thank you message should be a sibling of the form (inside of the form's parent element)
       return;
