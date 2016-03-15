@@ -4,7 +4,7 @@ $(function(){
 });
 
 function getFormData(form) {
-  var elements = $(form).find('input'); // all form elements
+  var elements = $(form).find('input, textarea, select'); // all form elements
   var data = {};
   $(elements).each(function(index,element){
     data[element.name] = element.value;
