@@ -20,13 +20,14 @@ function handleFormSubmit(event) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
   }).join('&');
 
-  $.ajax({
+  var request = $.ajax({
     type: 'POST',
     url: event.target.action,
-    data: encoded,
-    success: function(data, status, xhr){
-      form.hide();
-      form.parent().find('.thank-you-message').show();
-    }
+    data: encoded
+  });
+
+  request.done(function(data){
+    form.hide();
+    form.parent().find('.thank-you-message').show();
   });
 }
