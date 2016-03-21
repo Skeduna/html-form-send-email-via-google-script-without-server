@@ -20,6 +20,9 @@ function handleFormSubmit(event) {
     return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]);
   }).join('&');
 
+  form.hide();
+  form.parent().find('.thank-you-message').show();
+
   var request = $.ajax({
     type: 'POST',
     url: event.target.action,
@@ -27,7 +30,18 @@ function handleFormSubmit(event) {
   });
 
   request.done(function(data){
-    form.hide();
-    form.parent().find('.thank-you-message').show();
+    console.log(data);
+  });  
+}
+
+function validate(form){
+  var valid = true;
+  var elements = $(form).find('input, select, textarea');
+  $(elements).each(function(index,element){
+    if( $(element).attr('required') && (!element.value || element.value == '') ){
+      valid = false;
+      $(element).addClass('invalid');
+    }
   });
+  return valid;
 }
